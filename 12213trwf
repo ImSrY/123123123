@@ -1,0 +1,217 @@
+// Sarah Al-Attraqchi
+
+#include <iostream>
+#include <assert.h>
+
+
+// rounding function using ternary operator and double -> integer converter.
+int simpleRound(double answer){
+
+    // determines if positive or negative number and helps round up or down. (see physical notes for more info)
+    int (answer > 0) ? answer += 0.5 : answer -= 0.5;
+
+    int integerVariant = (int) answer;
+
+
+    return integerVariant;
+
+}
+
+int isExactChange(unsigned int pennyPrice){
+
+
+
+    int(pennyPrice % 5 == 0) ? pennyPrice = 1 : pennyPrice = 0;
+
+
+    return pennyPrice;
+
+}
+
+int numQuarters(unsigned int pennyPrice){
+
+    int answer = pennyPrice / 25;
+    return answer;
+
+}
+
+
+const char* superBowlConvertSmall(unsigned int sbNum);
+const char* superBowlConvertLarge(unsigned int sbNum);
+// Takes a superbowl number between 0 and 100 (inclusive)
+// and outputs a message about what the roman numbers for the game are.
+void superBowlPrinter(unsigned int sbNum) {
+    if (sbNum == 0 || sbNum > 100) {
+        return;
+    }
+    // Example for a sbNum of 52, sbSmall is "II" and sbLarge is "L"
+    const char *sbSmall = superBowlConvertSmall(sbNum % 10);
+    const char *sbLarge = superBowlConvertLarge(sbNum - (sbNum % 10));
+    printf("Super Bowl % i is %s%s \n", sbNum, sbLarge, sbSmall);
+}
+
+const char* superBowlConvertSmall(unsigned int sbNum){
+
+        switch (sbNum){
+
+            case 1:
+                return "I";
+                break;
+
+            case 2:
+                return "II";
+                break;
+
+            case 3:
+                return "III";
+                break;
+
+            case 4:
+                return "IV";
+                break;
+
+            case 5:
+                return "V";
+                break;
+
+            case 6:
+                return "VI";
+                break;
+
+            case 7:
+                return "VII";
+                break;
+
+            case 8:
+                return "VIII";
+                break;
+
+            case 9:
+                return "IX";
+                break;
+
+            default:
+                return "";
+                break;
+
+    }
+
+}
+
+const char* superBowlConvertLarge(unsigned int sbNum){
+
+        switch(sbNum) {
+
+            case 10:
+                return "X";
+                break;
+
+            case 20:
+                return "XX";
+                break;
+
+            case 30:
+                return "XXX";
+                break;
+
+            case 40:
+                return "XL";
+                break;
+
+            case 50:
+                return "L";
+                break;
+
+            case 60:
+                return "LX";
+                break;
+
+            case 70:
+                return "LXX";
+                break;
+
+            case 80:
+                return "LXXX";
+                break;
+
+            case 90:
+                return "XC";
+                break;
+
+            case 100:
+                return "C";
+                break;
+
+            default:
+                return "";
+                break;
+
+
+
+        }
+
+
+}
+
+
+
+
+int main() {
+
+    // trying out simpleRound
+    printf("2.5 rounded is %i", simpleRound(2.5));
+    printf("\n-2.5 rounded is %i", simpleRound(-2.5));
+    printf("\n2.3 rounded is %i", simpleRound(2.3));
+    printf("\n-2.3 rounded is %i", simpleRound(-2.3));
+
+
+    // Test simpleRound
+    assert(simpleRound(2.5) == 3);
+    assert(simpleRound(-2.6) == -3);
+    assert(simpleRound(-6.2) == -6);
+    assert(simpleRound(5.0) == 5);
+    assert(simpleRound(11.2) == 11);
+
+
+    // Trying out isExactChange
+    printf("\n\n is 115 able to be given in exact change? %i (1 yes, 0 no)", isExactChange(115));
+    printf("\n is 116 able to be given in exact change? %i (1 yes, 0 no)", isExactChange(116));
+    printf("\n is 3951 able to be given in exact change? %i (1 yes, 0 no)", isExactChange(3951));
+    printf("\n is 10 able to be given in exact change? %i (1 yes, 0 no)", isExactChange(10));
+    printf("\n is 0 able to be given in exact change? %i (1 yes, 0 no)", isExactChange(0));
+
+
+
+    // Test isExactChange
+    assert(isExactChange(0));
+    assert(isExactChange(115));
+    assert(isExactChange(116) == 0);
+    assert(isExactChange(30));
+    assert(isExactChange(9218) == 0);
+
+    // Test numQuarters
+    printf("\n\n$1.15 is made up of %i quarters", numQuarters(115));
+    printf("\n$3.77 is made up of %i quarters", numQuarters(377));
+    printf("\n$9.99 is made up of %i quarters", numQuarters(999));
+    printf("\n$0.15 is made up of %i quarters\n\n", numQuarters(15));
+
+    assert(numQuarters(115) == 4);
+    assert(numQuarters(377) == 15);
+    assert(numQuarters(999) == 39);
+    assert(numQuarters(15) == 0);
+
+
+    // Test superBowlPrint // shouldn't print anything over 100 or under 0
+    superBowlPrinter(45);
+    superBowlPrinter(100);
+    superBowlPrinter(70);
+    superBowlPrinter(0);
+    superBowlPrinter(5);
+    superBowlPrinter(-10);
+    superBowlPrinter(1000);
+
+
+}
+
+
+
